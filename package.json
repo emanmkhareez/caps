@@ -1,0 +1,28 @@
+{
+  "name": "caps",
+  "version": "1.0.0",
+  "description": "",
+  "main": "caps.js",
+  "scripts": {
+    "start": "node caps.js",
+    "test": "jest  --coverage "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emanmkhareez/caps.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emanmkhareez/caps/issues"
+  },
+  "homepage": "https://github.com/emanmkhareez/caps#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "faker": "^5.5.3",
+    "jest": "^27.1.0",
+    "supertest": "^6.1.6",
+    "test": "^0.6.0"
+  }
+}
