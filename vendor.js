@@ -1,30 +1,31 @@
-'use strict'
-require('dotenv').config()
-const events=require('./events')
-const STORE_NAME =process.env.STORE_NAME
-  const faker=require('faker')
+"use strict";
+
+require("dotenv").config();
+const faker = require("faker");
+const events = require("./events.js");
+
+events.on("delivered", (payload) => {
+  console.log(`VENDOR: Thank you for delivering  ${payload.orderId}`);
+  console.log(`EVENT { event: 'delivered',
+  time:${new Date().toString()},
+  payload:
+   { store: ${process.env.STORE_NAME},
+     orderID: ${payload.orderId},
+     customer: ${payload.customer},
+     address: ${payload.address}`);
+});
 
 
 setInterval(()=>{
 
     let order={
-        store:STORE_NAME,
+        store:process.env.STORE_NAME,
         orderId:faker.datatype.uuid(),
         customer:faker.name.findName(),
         address:faker.address.streetAddress(),
        
     }
     events.emit('pickup',order)
-    events.emit('in-transit',order)
-    events.emit('delivered',order)
+    
 
 },5000)
-
-events.on('vendor',vendorFunction)
-
- function vendorFunction(orderId){
-    setTimeout(() => { 
-        console.log(`VENDOR: Thank you for delivering😍 ${orderId.orderId}`)
-        
-    }, 1000);
-}

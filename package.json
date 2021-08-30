@@ -5,7 +5,7 @@
   "main": "caps.js",
   "scripts": {
     "start": "node caps.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest  --coverage "
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,9 @@
   "homepage": "https://github.com/emanmkhareez/caps#readme",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "faker": "^5.5.3"
+    "faker": "^5.5.3",
+    "jest": "^27.1.0",
+    "supertest": "^6.1.6",
+    "test": "^0.6.0"
   }
 }
