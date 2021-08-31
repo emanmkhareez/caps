@@ -1,10 +1,12 @@
 "use strict";
-
+require("dotenv").config()
+const io =require('socket.io-client')
+const host= 'http://localhost:3000/caps'
+const connectioncapsNameSpace=io.connect(host)
 require("dotenv").config();
 const faker = require("faker");
-const events = require("./events.js");
 
-events.on("delivered", (payload) => {
+connectioncapsNameSpace.on("delivered",(payload)=>{
   console.log(`VENDOR: Thank you for delivering  ${payload.orderId}`);
   console.log(`EVENT { event: 'delivered',
   time:${new Date().toString()},
@@ -13,7 +15,11 @@ events.on("delivered", (payload) => {
      orderID: ${payload.orderId},
      customer: ${payload.customer},
      address: ${payload.address}`);
-});
+
+})
+
+
+
 
 
 setInterval(()=>{
@@ -25,7 +31,7 @@ setInterval(()=>{
         address:faker.address.streetAddress(),
        
     }
-    events.emit('pickup',order)
+    connectioncapsNameSpace.emit('pickup',order)
     
 
 },5000)

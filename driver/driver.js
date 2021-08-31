@@ -1,9 +1,12 @@
 "use strict";
-
-const event = require("./events.js");
 require('dotenv').config();
+const io=require('socket.io-client')
+const host= 'http://localhost:3000/caps'
+const connectioncapsNamespace=io.connect(host)
+// const event = require("./events.js");
 
-event.on("pickup", pickUpOrder);
+
+connectioncapsNamespace.on("pickup", pickUpOrder);
 
 function pickUpOrder(payload) {
   console.log(`EVENT { event: 'pickup',
@@ -15,10 +18,10 @@ function pickUpOrder(payload) {
        address: ${payload.address} }}`);
        console.log(`Driver: picked up ${payload.orderId}`);
   setTimeout(() => {
-    event.emit("in-transit", payload);
-  }, 1000);
+    connectioncapsNamespace.emit("in-transit", payload);
+  }, 1000); 
   setTimeout(() => {
     console.log(`DRIVER: delivered up ${payload.orderId}`);
-    event.emit("delivered", payload);
+    connectioncapsNamespace.emit("delivered", payload);
   }, 3000);
 }
