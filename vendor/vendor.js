@@ -8,14 +8,7 @@ const faker = require("faker");
 
 connectioncapsNameSpace.on("delivered",(payload)=>{
   console.log(`VENDOR: Thank you for delivering  ${payload.orderId}`);
-  console.log(`EVENT { event: 'delivered',
-  time:${new Date().toString()},
-  payload:
-   { store: ${process.env.STORE_NAME},
-     orderID: ${payload.orderId},
-     customer: ${payload.customer},
-     address: ${payload.address}`);
-
+  
 })
 
 
@@ -33,5 +26,12 @@ setInterval(()=>{
     }
     connectioncapsNameSpace.emit('pickup',order)
     
+    
 
 },5000)
+
+connectioncapsNameSpace.on('orderinQueue',ordersQueue)
+function ordersQueue(payload){
+  console.log(`VENDOR: Order in Queue :`, payload.orderId);
+
+}
